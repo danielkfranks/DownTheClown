@@ -16,12 +16,16 @@
 #include "DTC_Servos.h"
 #include "DTC_LEDs.h"
 
-
+// global variables
 Servo rightServos[6];
 Servo leftServos[6];
 
-// the LED needs to be handled in discrete circuitry here - with a real switch this should be ezpz
+int leftSensors[8];
+int rightSensors[8];
 
+int leftScore, rightScore;
+
+long timeRemaining; // scared of overflowing it
 
 void setup() {
   // configure servos:
@@ -39,18 +43,32 @@ void setup() {
   leftServos[5].attach(12);  // this is the least pretty way possible to do it but it's also not unmaintainable slop like any for loop I wrote would be
 
   // configure sensors:
-  int leftSensors = [20, 21, 22, 23, 24, 25, 26, 27]; // hopefully I don't need to pinMode these either
-  int rightSensors = [30, 31, 32, 33, 34, 35, 36, 37];
+  leftSensors = [20, 21, 22, 23, 24, 25, 26, 27]; // hopefully I don't need to pinMode these either
+  rightSensors = [30, 31, 32, 33, 34, 35, 36, 37];
 
   // start keeping time:
+  timeRemaining = 3*60*1000;
+  initTimer();                                         // from DTC_Timekeeping.h
 
   // set initial score to (0,0):
+  leftScore = 0;
+  rightScore = 0;
 
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  // game logic goes here pretty much
+  leftScore = checkClownsDown(leftSensors);            // from DTC_Sensing.h
+  rightScore = checkClownsDown(rightSensors);          // from DTC_Sensing.h
 
+  timeRemaining = checkTimer();                        // from DTC_Timekeeping.h
+  displayTimeRemaining();                              // from DTC_Timekeeping.h
+
+  if(timeRemaining <= 0) {
+    // game is over
+    displayWinner(leftScore, rightScore);              // from DTC_Scorekeeping.h
+    return;
+  }
   
 
 }
