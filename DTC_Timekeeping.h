@@ -14,7 +14,7 @@ long checkTimer() {
 	return timeRemaining;
 }
 
-void displayTimeRemaining() {
+void displayTimeRemaining(long timeRemaining) {
 	// LCD code here
 	
 }

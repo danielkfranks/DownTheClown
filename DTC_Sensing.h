@@ -19,4 +19,19 @@ int checkClownsDown(int pins[8]) {
   return score;
 }
 
+bool checkRowDown(int pins[8], int row) {
+	bool rowDown = false;
+	if(row == 3) {
+		// top row
+		rowDown = digitalRead(pins[6]) && digitalRead(pins[7]);
+	} else if(row == 2) {
+		rowDown = digitalRead(pins[3]) && digitalRead(pins[4]) && digitalRead(pins[5]);
+	} else if(row == 1) {
+		rowDown = digitalRead(pins[0]) && digitalRead(pins[1]) && digitalRead(pins[2]);
+	} else {
+		rowDown = false; // error state but how dare we log it
+	}
+	return rowDown;
+}
+
 #endif

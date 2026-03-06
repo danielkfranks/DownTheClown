@@ -62,7 +62,17 @@ void loop() {
   rightScore = checkClownsDown(rightSensors);          // from DTC_Sensing.h
 
   timeRemaining = checkTimer();                        // from DTC_Timekeeping.h
-  displayTimeRemaining();                              // from DTC_Timekeeping.h
+  displayTimeRemaining(timeRemaining);                 // from DTC_Timekeeping.h
+  
+  for(int i = 1, i <= 3, i++) {
+    if(checkRowDown(leftSensors, i)) {                 // from DTC_Sensing.h
+      resetRow(leftServos, i);                         // from DTC_Servos.h
+    }
+
+    if(checkRowDown(rightSensors, i)) {                // from DTC_Sensing.h
+      resetRow(rightServos, i);                        // from DTC_Servos.h
+    }
+  }
 
   if(timeRemaining <= 0) {
     // game is over
