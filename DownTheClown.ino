@@ -9,51 +9,19 @@
 #include <Servo.h>
 #include <LiquidCrystal.h>
 
-// maybe I hate global variables but I can't redefine setup() and loop() so here we are
-int downPosition = 180, upPosition = 35; // can't know these until we build the physical thingy so TODO set these
+// internal includes
+#include "DTC_Timekeeping.h"
+#include "DTC_Scorekeeping.h"
+#include "DTC_Sensing.h"
+#include "DTC_Servos.h"
+#include "DTC_LEDs.h"
+
 
 Servo[6] rightServos;
 Servo[6] leftServos;
 
 // the LED needs to be handled in discrete circuitry here - with a real switch this should be ezpz
 
-int ResetRow(char side, int rowNumber){
-  Servo[6] servoArray;
-  int idx1 = 0, idx2 = 0; // initialize values for safety :)
-  
-  if(side == 'r') {
-    servoArray = rightServos;
-  } else if(side == 'l') {
-    servoArray = leftServos;
-  } else return -1; // error condition
-  
-  switch(rowNumber) {
-    case 1:
-      idx1 = 0;
-      idx2 = 1;
-      break;
-    case 2:
-      idx1 = 2;
-      idx2 = 3;
-      break;
-    case 3:
-      idx1 = 4;
-      idx2 = 5;
-      break;
-    default:     // also an error condition
-      return -1;
-      break; // pretty sure this line is irrelevant but good coding practice
-  }
-
-  // finally do actual work
-  servoArray[idx1].write(upPosition);
-  servoArray[idx2].write(upPosition);
-  delay(15);                            // might have to tune this idk
-  servoArray[idx1].write(downPosition); // set them back down so the clowns can be knocked down again
-  servoArray[idx2].write(downPosition); 
-
-  return 0; // success !!
-}
 
 void setup() {
   // put your setup code here, to run once:
