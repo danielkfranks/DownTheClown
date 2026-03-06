@@ -39,6 +39,8 @@ void setup() {
   leftServos[5].attach(12);  // this is the least pretty way possible to do it but it's also not unmaintainable slop like any for loop I wrote would be
 
   // configure sensors:
+  int leftSensors = [20, 21, 22, 23, 24, 25, 26, 27]; // hopefully I don't need to pinMode these either
+  int rightSensors = [30, 31, 32, 33, 34, 35, 36, 37];
 
   // start keeping time:
 
