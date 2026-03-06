@@ -17,8 +17,8 @@
 #include "DTC_LEDs.h"
 
 
-Servo[6] rightServos;
-Servo[6] leftServos;
+Servo rightServos[6];
+Servo leftServos[6];
 
 // the LED needs to be handled in discrete circuitry here - with a real switch this should be ezpz
 

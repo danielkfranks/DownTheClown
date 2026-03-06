@@ -1,6 +1,9 @@
+#ifndef DTC_SERVO_H
+#define DTC_SERVO_H
+
 #include <Servo.h>
 
-int ResetRow(Servo[6] servoArray, int rowNumber) {
+int ResetRow(Servo servoArray[6], int rowNumber) {
 	int upPosition = 35, downPosition = 180; // TODO tune these PLEASE
 	int idx1 = 0, idx2 = 0;
 
@@ -30,4 +33,5 @@ int ResetRow(Servo[6] servoArray, int rowNumber) {
 
 	return 0;
 }
-	
+
+#endif
