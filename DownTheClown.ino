@@ -24,7 +24,7 @@ Servo leftServos[6];
 
 
 void setup() {
-  // put your setup code here, to run once:
+  // configure servos:
   rightServos[0].attach(1);  // do I need to pinMode these? the example code doesn't.
   rightServos[1].attach(2);
   rightServos[2].attach(3);
@@ -38,9 +38,17 @@ void setup() {
   leftServos[4].attach(11);
   leftServos[5].attach(12);  // this is the least pretty way possible to do it but it's also not unmaintainable slop like any for loop I wrote would be
 
+  // configure sensors:
+
+  // start keeping time:
+
+  // set initial score to (0,0):
+
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
+
+  
 
 }
