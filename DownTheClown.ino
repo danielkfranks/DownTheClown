@@ -16,6 +16,10 @@
 #include "DTC_Sensing.h"
 #include "DTC_Servos.h"
 #include "DTC_LEDs.h"
+#include "DTC_Manual.h"
+
+// sketch configuration
+#define DEBUG_LEVEL 1
 
 // global variables
 // these are in DTC_PinsConsts.h now to keep them seperate from the game logic, look there
@@ -44,14 +48,20 @@ void setup() {
   timeRemaining *= 2*minutes; // has to be done like this to slip under the int overflow threshold
   initTimer();                                         // from DTC_Timekeeping.h
 
-
-
+  // start serial for manual/debug use
+  Serial.begin(9600);
+  Serial.println("           "); // purge garbage so it looks cool
+  Serial.println("DownTheClown initialized, awaiting instructions...");
 }
 
 void loop() {
   // game logic goes here pretty much
   leftScore = checkClownsDown(leftSensors);            // from DTC_Sensing.h
   rightScore = checkClownsDown(rightSensors);          // from DTC_Sensing.h
+  if(DEBUG_LEVEL >= 2){
+    Serial.print("Current score: Right "); Serial.print(rightScore);
+    Serial.print(", Left: "); Serial.println(leftScore);
+  }
 
   timeRemaining = checkTimer();                        // from DTC_Timekeeping.h
   displayTimeRemaining(timeRemaining);                 // from DTC_Timekeeping.h
@@ -59,11 +69,28 @@ void loop() {
   for(int i = 1; i <= 3; i++) {
     if(checkRowDown(leftSensors, i)) {                 // from DTC_Sensing.h
       resetRow(leftServos, i);                         // from DTC_Servos.h
+      if(DEBUG_LEVEL) {
+        Serial.print("Automatically raised left servo bank, row ");
+        Serial.println(i);
+      }
     }
 
     if(checkRowDown(rightSensors, i)) {                // from DTC_Sensing.h
       resetRow(rightServos, i);                        // from DTC_Servos.h
+      if(DEBUG_LEVEL) {
+        Serial.print("Automatically raised right servo bank, row ");
+        Serial.println(i);
+      }
     }
+  }
+
+  serialManage(); // check for a manual override (from DTC_Manual.h)
+
+  if(DEBUG_LEVEL >= 2){
+    // this runs EVERY LOOP until I find a way to delay it so it's at a higher debug
+    Serial.println("Current score reading------------------------");
+    Serial.print("Right bank: "); Serial.print(rightScore);
+    Serial.print(", Left bank: "); Serial.println(leftScore);
   }
 
   if(timeRemaining <= 0) {

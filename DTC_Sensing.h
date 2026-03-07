@@ -3,6 +3,7 @@
 
 // code here
 
+// for scoring:
 int checkClownsDown(int pins[8]) {
   // hoping the digitalRead threshold is reasonable
   // that being said, bool to int conversion is implicit
@@ -19,6 +20,7 @@ int checkClownsDown(int pins[8]) {
   return score;
 }
 
+// for auto row reset:
 bool checkRowDown(int pins[8], int row) {
 	bool rowDown = false;
 	if(row == 3) {
