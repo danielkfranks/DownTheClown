@@ -3,7 +3,7 @@
 
 #include <Servo.h>
 
-int ResetRow(Servo servoArray[6], int rowNumber) { // this function has a 15 ms delay in it, maybe change to a millis() call somehow?
+int resetRow(Servo servoArray[6], int rowNumber) { // this function has a 15 ms delay in it, maybe change to a millis() call somehow?
 	int upPosition = 35, downPosition = 180; // TODO tune these PLEASE
 	int idx1 = 0, idx2 = 0;
 

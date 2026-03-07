@@ -2,7 +2,7 @@
 #define DTC_TIMEKEEPING_H
 
 // code here
-static long startTim;
+static long startTime;
 
 void initTimer() {
 	startTime = millis();

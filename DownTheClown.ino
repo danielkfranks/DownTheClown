@@ -10,6 +10,7 @@
 #include <LiquidCrystal.h>
 
 // internal includes
+#include "DTC_PinsConsts.h"
 #include "DTC_Timekeeping.h"
 #include "DTC_Scorekeeping.h"
 #include "DTC_Sensing.h"
@@ -17,42 +18,32 @@
 #include "DTC_LEDs.h"
 
 // global variables
-Servo rightServos[6];
-Servo leftServos[6];
+// these are in DTC_PinsConsts.h now to keep them seperate from the game logic, look there
 
-int leftSensors[8];
-int rightSensors[8];
-
-int leftScore, rightScore;
-
-long timeRemaining; // scared of overflowing it
 
 void setup() {
   // configure servos:
-  rightServos[0].attach(1);  // do I need to pinMode these? the example code doesn't.
-  rightServos[1].attach(2);
-  rightServos[2].attach(3);
-  rightServos[3].attach(4);
-  rightServos[4].attach(5);
-  rightServos[5].attach(6);
-  leftServos[0].attach(7);
-  leftServos[1].attach(8);
-  leftServos[2].attach(9);
-  leftServos[3].attach(10);
-  leftServos[4].attach(11);
-  leftServos[5].attach(12);  // this is the least pretty way possible to do it but it's also not unmaintainable slop like any for loop I wrote would be
+  rightServos[0].attach(rightServoPins[0]);  // do I need to pinMode these? the example code doesn't.
+  rightServos[1].attach(rightServoPins[1]);  // the arrays are from DTC_PinsConsts.h
+  rightServos[2].attach(rightServoPins[2]);
+  rightServos[3].attach(rightServoPins[3]);
+  rightServos[4].attach(rightServoPins[4]);
+  rightServos[5].attach(rightServoPins[5]);
+  leftServos[0].attach(leftServoPins[0]);
+  leftServos[1].attach(leftServoPins[1]);
+  leftServos[2].attach(leftServoPins[2]);
+  leftServos[3].attach(leftServoPins[3]);
+  leftServos[4].attach(leftServoPins[4]);
+  leftServos[5].attach(leftServoPins[5]);  // this is the least pretty way possible to do it but it's also not unmaintainable slop like any for loop I wrote would be
 
   // configure sensors:
-  leftSensors = [20, 21, 22, 23, 24, 25, 26, 27]; // hopefully I don't need to pinMode these either
-  rightSensors = [30, 31, 32, 33, 34, 35, 36, 37];
-
+  // I hope I don't have to pinMode them
+  
   // start keeping time:
   timeRemaining = 3*60*1000;
   initTimer();                                         // from DTC_Timekeeping.h
 
-  // set initial score to (0,0):
-  leftScore = 0;
-  rightScore = 0;
+
 
 }
 
@@ -64,7 +55,7 @@ void loop() {
   timeRemaining = checkTimer();                        // from DTC_Timekeeping.h
   displayTimeRemaining(timeRemaining);                 // from DTC_Timekeeping.h
   
-  for(int i = 1, i <= 3, i++) {
+  for(int i = 1; i <= 3; i++) {
     if(checkRowDown(leftSensors, i)) {                 // from DTC_Sensing.h
       resetRow(leftServos, i);                         // from DTC_Servos.h
     }
