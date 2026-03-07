@@ -40,7 +40,8 @@ void setup() {
   // I hope I don't have to pinMode them
   
   // start keeping time:
-  timeRemaining = 3*60*1000;
+  timeRemaining = 1000*30; // one half minute of time, variable from DTC_PinsConsts.h
+  timeRemaining *= 2*minutes; // has to be done like this to slip under the int overflow threshold
   initTimer();                                         // from DTC_Timekeeping.h
 
 

@@ -15,6 +15,7 @@ int leftSensors[8] = {30, 31, 32, 33, 34, 35, 36, 37};
 
 int rightScore = 0, leftScore = 0;
 
+int minutes = 3;
 long timeRemaining; // this warns about int overflow
 // if it was an int it would, but a long holds about a month in milliseconds
 #endif
