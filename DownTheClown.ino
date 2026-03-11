@@ -6,6 +6,9 @@
  *  - Reset clowns based on manual and automatic triggers
  */
 
+// THIS FILE IS DEPRECIATED
+// THE PROGRAM IS NOW DESIGNED FOR TWO SEPERATE UNITS
+
 #include <Servo.h>
 #include <LiquidCrystal.h>
 
