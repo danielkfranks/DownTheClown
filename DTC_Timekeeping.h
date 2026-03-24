@@ -1,6 +1,8 @@
 #ifndef DTC_TIMEKEEPING_H
 #define DTC_TIMEKEEPING_H
 
+// DEPRECIATED
+
 // code here
 static long startTime;
 

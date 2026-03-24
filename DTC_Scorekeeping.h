@@ -2,9 +2,10 @@
 #define DTC_SCOREKEEPING_H
 
 // code here
-// Jacob please fill this out
-void displayWinner(int left, int right) {
-
+void printScore(int score) {
+  lcd.setCursor(1, 1);
+  lcd.print("Score: ");
+  lcd.print(score); // I'm sure this will Just Work
 }
 
 #endif
