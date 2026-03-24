@@ -10,8 +10,8 @@ Servo servos[6];
 // Serial communication uses pins 0 and 1
 
 // LCD communication needs six pins
-int lcdPins[6] = {13, 12, 11, 10, 9, 8}
-LiquidCrystal lcd(lcdPins(0), lcdPins(1), lcdPins(2), lcdPins(3), lcdPins(4), lcdPins(5));
+int lcdPins[6] = {13, 12, 11, 10, 9, 8};
+LiquidCrystal lcd(lcdPins[0], lcdPins[1], lcdPins[2], lcdPins[3], lcdPins[4], lcdPins[5]);
 
 // need six servos
 int servoPins[6] = {2, 3, 4, 5, 6, 7};

@@ -3,7 +3,7 @@
 
 // DEPRECIATED
 
-// code here
+/*
 static long startTime;
 
 void initTimer() {
@@ -22,5 +22,5 @@ void displayTimeRemaining(long timeRemaining) {
 	// LCD code here
 	
 }
-
+*/
 #endif

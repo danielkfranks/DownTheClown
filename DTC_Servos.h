@@ -4,7 +4,7 @@
 #include <Servo.h>
 
 int resetRow(Servo servoArray[6], int rowNumber) { // this function has a 15 ms delay in it, maybe change to a millis() call somehow?
-	int upPosition = 35, downPosition = 180; // TODO tune these PLEASE
+	int upPosition = 90, downPosition1 = 180, downPosition2 = 0; // TODO tune these PLEASE
 	int idx1 = 0, idx2 = 0;
 
 	switch(rowNumber) {
@@ -27,9 +27,9 @@ int resetRow(Servo servoArray[6], int rowNumber) { // this function has a 15 ms 
 
 	servoArray[idx1].write(upPosition);
 	servoArray[idx2].write(upPosition);
-	delay(15);
-	servoArray[idx1].write(downPosition);
-	servoArray[idx2].write(downPosition);
+	delay(150);
+	servoArray[idx1].write(downPosition1);
+	servoArray[idx2].write(downPosition2);
 
 	return 0;
 }
